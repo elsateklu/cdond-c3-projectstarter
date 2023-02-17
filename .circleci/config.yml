@@ -217,25 +217,25 @@ jobs:
           paths:
             - project/.circleci/ansible/inventory.txt
 
-  configure-infrastructure:
-    docker:
-      - image: cimg/python:3.10
-    steps:
-      - checkout
-      - install_ansible
-      - install_awscli
-      - add_ssh_keys:
-          fingerprints: ["82:63:d6:92:25:ff:d3:8c:c7:ac:58:01:ce:bc:4a:49"]
-      - attach_workspace:
-          at: ~/
-      - run:
-          name: Run Configure Server Ansible play
-          command: |
-            cd .circleci/ansible
-            cat inventory.txt
+  # configure-infrastructure:
+  #   docker:
+  #     - image: cimg/python:3.10
+  #   steps:
+  #     - checkout
+  #     - install_ansible
+  #     - install_awscli
+  #     - add_ssh_keys:
+  #         fingerprints: ["82:63:d6:92:25:ff:d3:8c:c7:ac:58:01:ce:bc:4a:49"]
+  #     - attach_workspace:
+  #         at: ~/
+  #     - run:
+  #         name: Run Configure Server Ansible play
+  #         command: |
+  #           cd .circleci/ansible
+  #           cat inventory.txt
 
-            ansible-playbook -i inventory.txt configure-server.yml
-      - destroy-environment
+  #           ansible-playbook -i inventory.txt configure-server.yml
+  #     - destroy-environment
 
 #   run-migrations:
 #     docker:
@@ -367,8 +367,8 @@ workflows:
           filters:
             branches:
               only: [master]
-      - configure-infrastructure:
-          requires: [deploy-infrastructure]
+      # - configure-infrastructure:
+      #     requires: [deploy-infrastructure]
       # - run-migrations:
       #     requires: [configure-infrastructure]
       # - deploy-frontend:
