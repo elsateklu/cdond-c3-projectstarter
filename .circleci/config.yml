@@ -165,7 +165,7 @@ jobs:
           keys:
             - frontend-deps-{{ checksum "frontend/package-lock.json" }}
       - run:
-          name: Install dependencies
+          name: Install all dependencies
           command: |
             cd frontend
             npm install
